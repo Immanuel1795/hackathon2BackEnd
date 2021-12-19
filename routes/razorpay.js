@@ -1,8 +1,8 @@
 import express from "express";
 const router = express.Router();
-
+import dotenv from "dotenv";
 import Razorpay from 'razorpay';
-
+dotenv.config();
 
 const razorInstance = new Razorpay({
   key_id : process.env.KEY_ID,
@@ -38,7 +38,7 @@ router.post("/capture/:paymentId",(req,res)=>{
   try{
     
 
-      fetch(`https://${process.env.KEY_ID}:${process.env.KEY_SECRET}@api.razorpay.com/v1/payments/${req.params.paymentId}/capture`,{
+      fetch(`${process.env.KEY_ID}:${process.env.KEY_SECRET}@api.razorpay.com/v1/payments/${req.params.paymentId}/capture`,{
         method: "POST",
         form:{
             amount : 10 *100,
